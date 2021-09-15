@@ -18,7 +18,7 @@ class EstablishmentTest {
 
 	@Test
 	void testEstablishmentStringDateDateStringLocation() {
-		Establishment e = new Establishment("hopital", new Date(), new Date(), "+221 45 45 45", new Location());
+		Establishment e = new Establishment(null,"hopital", new Date(), new Date(), "+221 45 45 45", new Location());
 		assertThat(e).isNotNull();
 		assertThat(e).isInstanceOf(Establishment.class);
 	}

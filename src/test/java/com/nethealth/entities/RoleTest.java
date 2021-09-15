@@ -8,8 +8,8 @@ class RoleTest {
 
 	@Test
 	void test() {
-		Role role = Role.ROLE_DOCTOR;
-		assertThat(role).isEqualTo(Role.ROLE_DOCTOR);
+		Role role = Role.DOCTOR;
+		assertThat(role).isEqualTo(Role.DOCTOR);
 	}
 
 }

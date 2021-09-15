@@ -11,7 +11,7 @@ import lombok.NoArgsConstructor;
 @Document(collection = "trainings")
 public class Education {
 	@Id
-	private String id_training;
+	private String id;
 	private String degree;
 	private Establishment establishment;
 

@@ -14,7 +14,7 @@ import lombok.NoArgsConstructor;
 @Document(collection = "doctors")
 public class Doctor {
 	@Id
-	private String id_doctor;
+	private String id;
 	private String username;
 	private String email;
 	private String password;

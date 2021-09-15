@@ -18,7 +18,7 @@ class PersonTest {
 
 	@Test
 	void testPersonStringStringDateStringStringLocation() {
-		Person p  = new Person("lili", "mimi", new Date(), "male", "+221 14 14 74", new Location());
+		Person p  = new Person(null,"lili", "mimi", new Date(), "male", "+221 14 14 74", new Location());
 		assertThat(p).isNotNull();
 		assertThat(p).isInstanceOf(Person.class);
 	}

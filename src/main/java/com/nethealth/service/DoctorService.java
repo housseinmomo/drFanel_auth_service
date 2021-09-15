@@ -7,7 +7,7 @@ import com.nethealth.entities.Doctor;
 @Service
 public interface DoctorService {
 	
-	public Doctor saveDoctor(Doctor doctor);
+	public Doctor saveDoctor(Doctor doctor) throws Exception;
 	public Doctor findDoctorByUsername(String username);
 	public Doctor findDoctorByEmail(String email);
 

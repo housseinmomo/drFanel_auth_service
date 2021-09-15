@@ -15,7 +15,7 @@ class LocationTest {
 
 	@Test
 	void testLocationStringStringStringString() {
-		Location l = new Location("senegal", "dakar", "point e", "98600");
+		Location l = new Location(null,"senegal", "dakar", "point e", "98600");
 		assertThat(l).isNotNull();
 		assertThat(l).isInstanceOf(Location.class);
 	}

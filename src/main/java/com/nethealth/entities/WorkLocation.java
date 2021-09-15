@@ -12,7 +12,7 @@ import lombok.NoArgsConstructor;
 @Document(collection = "work_locations")
 public class WorkLocation {
 	@Id
-	private String id_workLocation;
+	private String id;
 	private Establishment establishment;
 	private TypeOfWorkLocation typeOfWork;
 

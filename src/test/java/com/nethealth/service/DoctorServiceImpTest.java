@@ -44,11 +44,11 @@ class DoctorServiceImpTest {
 	
 
 	@Test
-	void testSaveDoctor() {
+	void testSaveDoctor() throws Exception {
 		List<String > roles = new ArrayList<>();
 		Doctor d = new Doctor(null, "bbili", "bbili@gmail.com", "TTili123",
-				new Person("mimi", "mimi", new Date(), "female", "+221 47 78 95",
-						new Location("Senegal", "dakar", "point e", "98000")), 0,
+				new Person(null,"mimi", "mimi", new Date(), "female", "+221 47 78 95",
+						new Location(null,"Senegal", "dakar", "point e", "98000")), 0,
 				new WorkLocation(), new Education(), roles);	
 		
 		Assert.assertNotNull(doctorService.saveDoctor(d));

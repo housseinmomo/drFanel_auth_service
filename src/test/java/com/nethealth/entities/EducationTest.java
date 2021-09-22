@@ -8,17 +8,17 @@ class EducationTest {
 
 	@Test
 	void testEducation() {
-		Education e = new Education();
-		assertThat(e).isNotNull();
-		assertThat(e).isInstanceOf(Education.class);
+		Education education = new Education();
+		assertThat(education).isNotNull();
+		assertThat(education).isInstanceOf(Education.class);
 	}
 	
 
 	@Test
 	void testEducationStringStringEstablishment() {
-		Education e = new Education("1", "doctorat", new Establishment());
-		assertThat(e).isNotNull();
-		assertThat(e).isInstanceOf(Education.class);
+		Education education = new Education("1", "doctorat", new Establishment());
+		assertThat(education).isNotNull();
+		assertThat(education).isInstanceOf(Education.class);
 	}
 
 }

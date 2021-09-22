@@ -8,9 +8,9 @@ class ConfirmationTokenTest {
 
 	@Test
 	void testConfirmationToken() {
-		ConfirmationToken ct = new ConfirmationToken("lili@gmail.com");
-		assertThat(ct).isNotNull();
-		assertThat(ct).isInstanceOf(ConfirmationToken.class);
+		ConfirmationToken confirmationToken = new ConfirmationToken("lili@gmail.com");
+		assertThat(confirmationToken).isNotNull();
+		assertThat(confirmationToken).isInstanceOf(ConfirmationToken.class);
 	}
 
 }

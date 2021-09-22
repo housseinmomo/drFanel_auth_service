@@ -8,16 +8,16 @@ class WorkLocationTest {
 
 	@Test
 	void testWorkLocation() {
-		WorkLocation wl  = new WorkLocation();
-		assertThat(wl).isNotNull();
-		assertThat(wl).isInstanceOf(WorkLocation.class);
+		WorkLocation workLocation  = new WorkLocation();
+		assertThat(workLocation).isNotNull();
+		assertThat(workLocation).isInstanceOf(WorkLocation.class);
 	}
 
 	@Test
 	void testWorkLocationStringEstablishmentTypeOfWorkLocationInt() {
-		WorkLocation wl  = new WorkLocation("1",new Establishment(), TypeOfWorkLocation.HEALTH_CENTRE);
-		assertThat(wl).isNotNull();
-		assertThat(wl).isInstanceOf(WorkLocation.class);
+		WorkLocation workLocation  = new WorkLocation("1",new Establishment(), TypeOfWorkLocation.HEALTH_CENTRE);
+		assertThat(workLocation).isNotNull();
+		assertThat(workLocation).isInstanceOf(WorkLocation.class);
 	}
 
 }

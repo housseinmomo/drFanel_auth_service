@@ -11,17 +11,17 @@ class PersonTest {
 
 	@Test
 	void testPerson() {
-		Person p  = new Person();
-		assertThat(p).isNotNull();
-		assertThat(p).isInstanceOf(Person.class);
+		Person person  = new Person();
+		assertThat(person).isNotNull();
+		assertThat(person).isInstanceOf(Person.class);
 	}
 	
 
 	@Test
 	void testPersonStringStringDateStringStringLocation() {
-		Person p  = new Person(null, "lili", "lili@gmail.com", "lili","lili", "mimi", new Date(), "male", "+221 14 14 74", new Location(), new ArrayList<>(), 0);
-		assertThat(p).isNotNull();
-		assertThat(p).isInstanceOf(Person.class);
+		Person person  = new Person(null, "lili", "lili@gmail.com", "lili","lili", "mimi", new Date(), "male", "+221 14 14 74", new Location(), new ArrayList<>(), 0);
+		assertThat(person).isNotNull();
+		assertThat(person).isInstanceOf(Person.class);
 	}
 
 }

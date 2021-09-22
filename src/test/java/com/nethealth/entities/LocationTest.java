@@ -8,16 +8,16 @@ class LocationTest {
 
 	@Test
 	void testLocation() {
-		Location l = new Location();
-		assertThat(l).isNotNull();
-		assertThat(l).isInstanceOf(Location.class);
+		Location location = new Location();
+		assertThat(location).isNotNull();
+		assertThat(location).isInstanceOf(Location.class);
 	}
 
 	@Test
 	void testLocationStringStringStringString() {
-		Location l = new Location(null,"senegal", "dakar", "point e", "98600");
-		assertThat(l).isNotNull();
-		assertThat(l).isInstanceOf(Location.class);
+		Location location = new Location(null,"senegal", "dakar", "point e", "98600");
+		assertThat(location).isNotNull();
+		assertThat(location).isInstanceOf(Location.class);
 	}
 
 }

@@ -8,8 +8,8 @@ class TypeOfWorkLocationTest {
 
 	@Test
 	void test() {
-		TypeOfWorkLocation type = TypeOfWorkLocation.HOSPITAL;
-		assertThat(type.equals(TypeOfWorkLocation.HOSPITAL));
+		TypeOfWorkLocation typeOfWorkLocation = TypeOfWorkLocation.HOSPITAL;
+		assertThat(typeOfWorkLocation.equals(TypeOfWorkLocation.HOSPITAL));
 		
 	}
 

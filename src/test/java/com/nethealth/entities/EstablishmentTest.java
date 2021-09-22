@@ -10,17 +10,17 @@ class EstablishmentTest {
 
 	@Test
 	void testEstablishment() {
-		Establishment e = new Establishment();
-		assertThat(e).isNotNull();
-		assertThat(e).isInstanceOf(Establishment.class);
+		Establishment establishment = new Establishment();
+		assertThat(establishment).isNotNull();
+		assertThat(establishment).isInstanceOf(Establishment.class);
 	}
 	
 
 	@Test
 	void testEstablishmentStringDateDateStringLocation() {
-		Establishment e = new Establishment(null,"hopital", new Date(), new Date(), "+221 45 45 45", new Location());
-		assertThat(e).isNotNull();
-		assertThat(e).isInstanceOf(Establishment.class);
+		Establishment establishment = new Establishment(null,"hopital", new Date(), new Date(), "+221 45 45 45", new Location());
+		assertThat(establishment).isNotNull();
+		assertThat(establishment).isInstanceOf(Establishment.class);
 	}
 
 }

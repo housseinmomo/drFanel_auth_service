@@ -34,7 +34,7 @@ public class ApplicationSwaggerConfig {
 	// it's use for customise a swagger ui
 	private ApiInfo getApiInfo() {
 		return new ApiInfoBuilder().title(" users api").version("1.0").description("api for managing user")
-				.contact(new Contact("Compagny : ", "terinnova.sn", "contact@terinnova.com"))
+				.contact(new Contact("Compagny : ", "https://terinnova.com/", "contact@terinnova.com"))
 				.license("Apache licence version 2.0").build();
 	}
 

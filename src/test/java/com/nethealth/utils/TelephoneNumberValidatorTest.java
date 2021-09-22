@@ -13,10 +13,10 @@ class TelephoneNumberValidatorTest {
 		String telephone3 = "0000007744";
 		String telephone4 = "sed122";
 		
-		assertThat(TelephoneNumberValidator.validateTelephone(telephone1)).isNotNull();
-		assertThat(TelephoneNumberValidator.validateTelephone(telephone2)).isNull();
-		assertThat(TelephoneNumberValidator.validateTelephone(telephone3)).isNotNull();
-		assertThat(TelephoneNumberValidator.validateTelephone(telephone4)).isNull();
+		assertThat(TelephoneNumberValidator.validateTelephone(telephone1)).isTrue();
+		assertThat(TelephoneNumberValidator.validateTelephone(telephone2)).isFalse();
+		assertThat(TelephoneNumberValidator.validateTelephone(telephone3)).isTrue();
+		assertThat(TelephoneNumberValidator.validateTelephone(telephone4)).isFalse();
 	}
 
 }

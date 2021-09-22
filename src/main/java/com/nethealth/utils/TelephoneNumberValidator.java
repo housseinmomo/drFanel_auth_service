@@ -13,22 +13,22 @@ public class TelephoneNumberValidator {
         return matcher.find();
 	}
 	
-	public static String validateTelephone(String telephone) {
+	public static boolean validateTelephone(String telephone) {
 		String result = telephone.replaceAll("\\s+","");
 		char firstCharactereTelephone = result.charAt(0);
 		int length = result.length();
 		if(firstCharactereTelephone == '+') {
 			String resultSubstring = result.substring(1);
 			if(validate(resultSubstring) && length >= 4 && length <= 15) {
-				return telephone;
+				return true;
 			}else {
-				return null;
+				return false;
 			}
 		}else {
 			if(validate(result) && length >= 4 && length <= 15) {
-				return telephone;
+				return true;
 			}else {
-				return null;
+				return false;
 			}
 		}
 	}

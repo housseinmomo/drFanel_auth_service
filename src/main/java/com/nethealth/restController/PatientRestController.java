@@ -16,10 +16,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.nethealth.entities.ConfirmationToken;
-import com.nethealth.entities.Doctor;
+import com.nethealth.entities.Patient;
 import com.nethealth.repository.ConfirmationTokenRepository;
-import com.nethealth.repository.PatientRepository;
-import com.nethealth.service.DoctorService;
+import com.nethealth.repository.DoctorRepository;
+import com.nethealth.service.PatientService;
 import com.nethealth.utils.ResponseMessage;
 import com.nethealth.utils.SendEmail;
 import com.nethealth.utils.TelephoneNumberValidator;
@@ -30,38 +30,38 @@ import com.nethealth.utils.exception.ObjectTokenException;
 
 
 @RestController
-@RequestMapping("/api/doctors")
-public class DoctorRestController {
+@RequestMapping("/api/patients")
+public class PatientRestController {
 	
 	@Autowired
-	private DoctorService doctorService;
+	private PatientService patientService;
+	@Autowired
+	private JavaMailSender javaMailSender;
 	@Autowired
 	private ConfirmationTokenRepository confirmationTokenRepository;
 	@Autowired
-	private PatientRepository patientRepository;
-	@Autowired
-	private JavaMailSender javaMailSender;
-
+	private DoctorRepository doctorRepository;
 	
 	
 	@PostMapping("")
-	public ResponseEntity<Object> save(@RequestBody Doctor doctor) {
+	public ResponseEntity<Object> save(@RequestBody Patient patient) {
 		ResponseMessage response = new ResponseMessage();
-		ConfirmationToken confirmationToken = new ConfirmationToken(doctor.getPerson().getEmail());
-		String telephone = doctor.getPerson().getPhoneNumber();
-		String email = doctor.getPerson().getEmail();
-		String username = doctor.getPerson().getUsername();
+		ConfirmationToken confirmationToken = new ConfirmationToken(patient.getPerson().getEmail());
+		String telephone = patient.getPerson().getPhoneNumber();
+		String email = patient.getPerson().getEmail();
+		String username = patient.getPerson().getUsername();
 		try {
-			ValidateData.validatorBean(doctor.getPerson());
-			ValidateData.validatorBean(doctor.getPerson().getLocation());
+			ValidateData.validatorBean(patient.getPerson());
+			ValidateData.validatorBean(patient.getPerson().getLocation());
 			ValidateData.validatorCondition("telephone number invalid", TelephoneNumberValidator.validateTelephone(telephone));
-			ValidateData.validatorObjectDataBase("a user already has this email", doctorService.findDoctorByEmail(email), patientRepository.findByPersonEmail(email));
-			ValidateData.validatorObjectDataBase("a user already has this username", doctorService.findDoctorByUsername(username), patientRepository.findByPersonUsername(username));
-			Doctor saveDoctor = doctorService.saveDoctor(doctor);
+			ValidateData.validatorObjectDataBase("a user already has this email", patientService.findPatientByEmail(email), doctorRepository.findByPersonEmail(email));
+			ValidateData.validatorObjectDataBase("a user already has this username", patientService.findPatientByEmail(username), doctorRepository.findByPersonUsername(username));
+			Patient savePatient = patientService.savePatient(patient);
 			response.setStatus(HttpStatus.CREATED);
-			response.updateEntry("user created ",saveDoctor);
+			response.updateEntry("user created ",savePatient);
 			confirmationTokenRepository.save(confirmationToken);
-			javaMailSender.send(SendEmail.automaticEmail(email, confirmationToken.getConfirmationToken()));		
+			javaMailSender.send(SendEmail.automaticEmail(email, confirmationToken.getConfirmationToken()));	
+			
 		}catch (ConditionException | MailException | ValidationException exception ) {
 			response.setStatus(HttpStatus.BAD_REQUEST);
             response.addEntry("message : ", exception.getMessage());
@@ -77,8 +77,8 @@ public class DoctorRestController {
 		
 		return ResponseEntity.status(response.getStatus()).body(response.getResponse());
 		
+		
 	}
-	
 	
 	@GetMapping("/account/confirm")
 	public ResponseEntity<Object> activateAccount(@RequestParam(value="link", required = true) String token){
@@ -87,12 +87,13 @@ public class DoctorRestController {
 			ConfirmationToken confirmationToken = confirmationTokenRepository.findByConfirmationToken(token);
 			ValidateData.validatorObjectToken("this link doesn't exist ", confirmationToken);
 			confirmationToken.validatorTime("this link has expired");
-			Doctor registredDoctor = doctorService.findDoctorByEmail(confirmationToken.getEmail());
-			registredDoctor.getPerson().setStatus(1);
-			doctorService.updateDoctor(registredDoctor);
+			Patient registredPatient = patientService.findPatientByEmail(confirmationToken.getEmail());
+			registredPatient.getPerson().setStatus(1);
+			patientService.updatePatient(registredPatient);
 			confirmationTokenRepository.delete(confirmationToken);
 			response.setStatus(HttpStatus.ACCEPTED);
-			response.updateEntry("your account is activated ",registredDoctor);	
+			response.updateEntry("your account is activated ",registredPatient);	
+			
 		}catch(CredentialExpiredException | ObjectTokenException exception) {
 			response.setStatus(HttpStatus.BAD_REQUEST);
             response.addEntry("message : ", exception.getMessage());
@@ -102,6 +103,9 @@ public class DoctorRestController {
 		}
 		return ResponseEntity.status(response.getStatus()).body(response.getResponse());
 	}
+	 
 	
+	
+ 
 
 }

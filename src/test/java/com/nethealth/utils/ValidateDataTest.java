@@ -8,13 +8,13 @@ import org.junit.jupiter.api.Test;
 
 import com.nethealth.entities.Person;
 
-class TestValidationTest {
+class ValidateDataTest {
 
 	@Test
 	void testValidatorBean() throws Exception {
 		try {
 			Person person = new Person();
-	        TestValidation.validatorBean(person);
+	        ValidateData.validatorBean(person);
 	    } catch(Exception e) {
 	    	assertThat(e.getMessage()).isEqualTo("validation impossible");
 	    }	

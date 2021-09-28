@@ -2,6 +2,8 @@ package com.nethealth.entities;
 
 import java.util.UUID;
 
+import javax.security.auth.login.CredentialExpiredException;
+
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
@@ -27,5 +29,13 @@ public class ConfirmationToken {
         time = System.currentTimeMillis();
         confirmationToken = UUID.randomUUID().toString();
     }
+    
+    public void validatorTime(String message) throws CredentialExpiredException {
+    	if(System.currentTimeMillis() - this.time > 60*60*1000) {
+    		throw new CredentialExpiredException(message);
+    	}
+    	
+    }
+
 
 }

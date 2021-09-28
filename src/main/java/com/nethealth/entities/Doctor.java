@@ -8,7 +8,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 
-@NoArgsConstructor @AllArgsConstructor @Data 
+@NoArgsConstructor @AllArgsConstructor @Data
 @Document(collection = "doctors")
 public class Doctor {
 	@Id
@@ -16,5 +16,7 @@ public class Doctor {
 	private Person person;
 	private WorkLocation location_name;
 	private Education training;
+	
+
 
 }

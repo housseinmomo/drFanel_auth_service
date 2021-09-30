@@ -13,6 +13,7 @@ import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
@@ -28,17 +29,19 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 	
 	@Bean
 	public PasswordEncoder passwordEncoder() {
-		return new BCryptPasswordEncoder();
-		
+		return new BCryptPasswordEncoder();	
 	}
 	
 	@Bean
 	public BCryptPasswordEncoder bcrypPasswordEncoder() {
-		return new BCryptPasswordEncoder();
-		
+		return new BCryptPasswordEncoder();	
 	}
 	
-	
+	@Bean
+    @Override
+    public UserDetailsService userDetailsService() {
+        return new InMemoryUserDetailsManager();
+    }
 
 	
 	@Bean
@@ -54,8 +57,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 	
 	@Override
 	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-		auth.userDetailsService(userDetailService).passwordEncoder(bcrypPasswordEncoder());
-		
+		auth.userDetailsService(userDetailService).passwordEncoder(bcrypPasswordEncoder());	
 	}
 	
 	
@@ -76,9 +78,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 		http.cors();
 		http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
 		http.authorizeRequests().antMatchers(HttpMethod.GET,"/api/doctors/account/confirm").permitAll();
+		http.authorizeRequests().antMatchers(HttpMethod.GET,"/api/patients/account/confirm" ).permitAll();
 		http.authorizeRequests().antMatchers(HttpMethod.POST,"/api/doctors").permitAll();
-		http.authorizeRequests().antMatchers(HttpMethod.GET,"/api/patients/account/confirm").permitAll();
-		http.authorizeRequests().antMatchers(HttpMethod.POST,"/api/patients").permitAll();
+		http.authorizeRequests().antMatchers(HttpMethod.POST,"/api/users/login").permitAll();
+		http.authorizeRequests().antMatchers(HttpMethod.POST, "/api/patients").permitAll();
 		http.authorizeRequests().anyRequest().authenticated();
 		
 	}

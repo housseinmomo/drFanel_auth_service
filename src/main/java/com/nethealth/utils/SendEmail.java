@@ -7,15 +7,14 @@ public class SendEmail {
 	
 	
 	
-	public static SimpleMailMessage automaticEmail(String email, String confirmationToken) {
+	public static SimpleMailMessage automaticEmail(String email, String confirmationToken, String title, String message) {
 		SimpleMailMessage simpleMailMessage = new SimpleMailMessage();
 		simpleMailMessage.setTo(email);
-		simpleMailMessage.setSubject("Complete Registration!");
+		simpleMailMessage.setSubject(title);
 		simpleMailMessage.setFrom("sandrine.louise.ekobe@gmail.com");
-		simpleMailMessage.setText("To confirm your account, please click here : "
-        +"http://localhost:9999/api/doctors/account/confirm?link="+confirmationToken);
+		simpleMailMessage.setText(message+confirmationToken);
         return simpleMailMessage;
 	}
-
+	
 
 }

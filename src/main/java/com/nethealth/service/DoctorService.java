@@ -11,5 +11,6 @@ public interface DoctorService {
 	public Doctor updateDoctor(Doctor doctor);
 	public Doctor findDoctorByUsername(String username);
 	public Doctor findDoctorByEmail(String email);
+	public Doctor updatePasswordDoctor(Doctor doctor, String password);
 
 }

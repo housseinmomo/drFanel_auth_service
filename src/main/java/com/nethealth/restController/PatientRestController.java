@@ -58,21 +58,22 @@ public class PatientRestController {
 			ValidateData.validatorObjectDataBase("a user already has this username", patientService.findPatientByEmail(username), doctorRepository.findByPersonUsername(username));
 			Patient savePatient = patientService.savePatient(patient);
 			response.setStatus(HttpStatus.CREATED);
-			response.updateEntry("user created ",savePatient);
+			response.addEntry("data",savePatient);
 			confirmationTokenRepository.save(confirmationToken);
-			javaMailSender.send(SendEmail.automaticEmail(email, confirmationToken.getConfirmationToken()));	
+			javaMailSender.send(SendEmail.automaticEmail(email, confirmationToken.getConfirmationToken(), "Complete Registration!", "To confirm your account, please click here : "
+			        +"http://localhost:9999/api/doctors/account/confirm?link="));	
 			
 		}catch (ConditionException | MailException | ValidationException exception ) {
 			response.setStatus(HttpStatus.BAD_REQUEST);
-            response.addEntry("message : ", exception.getMessage());
+            response.addEntry("message", exception.getMessage());
 			
 		}catch (ObjectDataBaseException exception) {
 			response.setStatus(HttpStatus.CONFLICT);
-            response.addEntry("message : ", exception.getMessage());
+            response.addEntry("message", exception.getMessage());
 			
 		}catch (Exception exception) {
 			response.setStatus(HttpStatus.INTERNAL_SERVER_ERROR);
-            response.addEntry("message :  ", exception.getMessage());
+            response.addEntry("message", exception.getMessage());
 		}
 		
 		return ResponseEntity.status(response.getStatus()).body(response.getResponse());
@@ -92,8 +93,7 @@ public class PatientRestController {
 			patientService.updatePatient(registredPatient);
 			confirmationTokenRepository.delete(confirmationToken);
 			response.setStatus(HttpStatus.ACCEPTED);
-			response.updateEntry("your account is activated ",registredPatient);	
-			
+			response.addEntry("data",registredPatient);	
 		}catch(CredentialExpiredException | ObjectTokenException exception) {
 			response.setStatus(HttpStatus.BAD_REQUEST);
             response.addEntry("message : ", exception.getMessage());

@@ -46,6 +46,12 @@ public class PatientServiceImp implements PatientService{
 	public Patient updatePatient(Patient patient) {
 		return patientRepository.save(patient);
 	}
+	
+	@Override
+	public Patient updatePasswordPatient(Patient patient, String password) {
+		patient.getPerson().setPassword(bcrypPasswordEncoder.encode(password));
+		return patientRepository.save(patient);
+	}
 	 
 
 	 

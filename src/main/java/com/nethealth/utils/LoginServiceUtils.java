@@ -33,7 +33,7 @@ public class LoginServiceUtils {
 		}
 		else if(doctorRepository.findByPersonEmail(username) != null) {
 			Doctor doctor = doctorRepository.findByPersonEmail(username);
-			String login = doctor.getPerson().getUsername();
+			String login = doctor.getPerson().getEmail();
 			String password = doctor.getPerson().getPassword();
 			loginModel = new LoginDto(login, password);
 		}
@@ -45,7 +45,7 @@ public class LoginServiceUtils {
 		}
 		else if(patientRepository.findByPersonEmail(username) != null) {
 			Patient patient = patientRepository.findByPersonEmail(username);
-			String login = patient.getPerson().getUsername();
+			String login = patient.getPerson().getEmail();
 			String password = patient.getPerson().getPassword();
 			loginModel = new LoginDto(login, password);
 		}

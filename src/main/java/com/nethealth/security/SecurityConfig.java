@@ -12,7 +12,6 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
@@ -25,12 +24,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 
 	@Autowired
 	UserDetailsService userDetailService;
-	
-	
-	@Bean
-	public PasswordEncoder passwordEncoder() {
-		return new BCryptPasswordEncoder();	
-	}
 	
 	@Bean
 	public BCryptPasswordEncoder bcrypPasswordEncoder() {
@@ -80,8 +73,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 		http.authorizeRequests().antMatchers(HttpMethod.GET,"/api/doctors/account/confirm").permitAll();
 		http.authorizeRequests().antMatchers(HttpMethod.GET,"/api/patients/account/confirm" ).permitAll();
 		http.authorizeRequests().antMatchers(HttpMethod.POST,"/api/doctors").permitAll();
-		http.authorizeRequests().antMatchers(HttpMethod.POST,"/api/users/login").permitAll();
 		http.authorizeRequests().antMatchers(HttpMethod.POST, "/api/patients").permitAll();
+		http.authorizeRequests().antMatchers(HttpMethod.POST,"/api/users/login").permitAll();
+		http.authorizeRequests().antMatchers(HttpMethod.POST, "/api/users/password/reset").permitAll();
+		http.authorizeRequests().antMatchers(HttpMethod.PUT, "/api/users/password").permitAll();
 		http.authorizeRequests().anyRequest().authenticated();
 		
 	}

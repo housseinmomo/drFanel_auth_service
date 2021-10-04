@@ -8,5 +8,6 @@ public interface PatientService {
 	Patient findPatientByUsername(String username);
 	Patient findPatientByEmail(String email);
 	public Patient updatePatient(Patient patient);
+	public Patient updatePasswordPatient(Patient patient, String password);
 
 }

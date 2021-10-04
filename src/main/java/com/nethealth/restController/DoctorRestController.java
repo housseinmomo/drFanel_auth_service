@@ -59,20 +59,21 @@ public class DoctorRestController {
 			ValidateData.validatorObjectDataBase("a user already has this username", doctorService.findDoctorByUsername(username), patientRepository.findByPersonUsername(username));
 			Doctor saveDoctor = doctorService.saveDoctor(doctor);
 			response.setStatus(HttpStatus.CREATED);
-			response.updateEntry("user created ",saveDoctor);
+			response.addEntry("data",saveDoctor);
 			confirmationTokenRepository.save(confirmationToken);
-			javaMailSender.send(SendEmail.automaticEmail(email, confirmationToken.getConfirmationToken()));		
+			javaMailSender.send(SendEmail.automaticEmail(email, confirmationToken.getConfirmationToken(), "Complete Registration!", "To confirm your account, please click here : "
+			        +"http://localhost:9999/api/doctors/account/confirm?link="));		
 		}catch (ConditionException | MailException | ValidationException exception ) {
 			response.setStatus(HttpStatus.BAD_REQUEST);
-            response.addEntry("message : ", exception.getMessage());
+            response.addEntry("message", exception.getMessage());
 			
 		}catch (ObjectDataBaseException exception) {
 			response.setStatus(HttpStatus.CONFLICT);
-            response.addEntry("message : ", exception.getMessage());
+            response.addEntry("message", exception.getMessage());
 			
 		}catch (Exception exception) {
 			response.setStatus(HttpStatus.INTERNAL_SERVER_ERROR);
-            response.addEntry("message :  ", exception.getMessage());
+            response.addEntry("message", exception.getMessage());
 		}
 		
 		return ResponseEntity.status(response.getStatus()).body(response.getResponse());
@@ -92,13 +93,13 @@ public class DoctorRestController {
 			doctorService.updateDoctor(registredDoctor);
 			confirmationTokenRepository.delete(confirmationToken);
 			response.setStatus(HttpStatus.ACCEPTED);
-			response.updateEntry("your account is activated ",registredDoctor);	
+			response.updateEntry("data",registredDoctor);	
 		}catch(CredentialExpiredException | ObjectTokenException exception) {
 			response.setStatus(HttpStatus.BAD_REQUEST);
-            response.addEntry("message : ", exception.getMessage());
+            response.addEntry("message", exception.getMessage());
 		}catch (Exception exception) {
 			response.setStatus(HttpStatus.INTERNAL_SERVER_ERROR);
-            response.addEntry("message :  ", exception.getMessage());
+            response.addEntry("message", exception.getMessage());
 		}
 		return ResponseEntity.status(response.getStatus()).body(response.getResponse());
 	}

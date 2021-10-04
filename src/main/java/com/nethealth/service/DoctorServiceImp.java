@@ -40,6 +40,12 @@ public class DoctorServiceImp implements DoctorService{
 		return doctorRepository.save(doctor);
 	}
 	
+	@Override
+	public Doctor updatePasswordDoctor(Doctor doctor, String password) {
+		doctor.getPerson().setPassword(bcrypPasswordEncoder.encode(password));
+		return doctorRepository.save(doctor);
+	}
+	
 	
 	@Override
 	public Doctor findDoctorByUsername(String username) {

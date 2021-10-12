@@ -86,20 +86,20 @@ node {
         //     }
         // }
 
-    stage("Push-Gitlab") {    
+//     stage("Push-Gitlab") {    
 
-       sh 'docker login registry.gitlab.com -u Abdoulfatah12 -p Malyounhouss123' 
+//        sh 'docker login registry.gitlab.com -u Abdoulfatah12 -p Malyounhouss123' 
         
-       sh "docker push $imageProject"
+//        sh "docker push $imageProject"
 
-       echo "Push success"
+//        echo "Push success"
             
-    }
-    stage("Create Backup <Dockerhub>")  {
-      sh 'docker login -u abdoulfatah123 -p malyoun123'
-      sh "docker tag $imageProject abdoulfatah123/drfanel:backup-$BUILD_ID"  
-      sh "docker push abdoulfatah123/drfanel:backup-$BUILD_ID"
-    }
+//     }
+//     stage("Create Backup <Dockerhub>")  {
+//       sh 'docker login -u abdoulfatah123 -p malyoun123'
+//       sh "docker tag $imageProject abdoulfatah123/drfanel:backup-$BUILD_ID"  
+//       sh "docker push abdoulfatah123/drfanel:backup-$BUILD_ID"
+//     }
     
     // stage("Remove-image") {
     //     sh "docker image rm -f $imageProject abdoulfatah123/drfanel:backup-$BUILD_ID"

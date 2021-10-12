@@ -10,7 +10,7 @@ node {
         }
 
         stage('Build_App') {
-            sh 'mvn package'
+            sh 'mvn validate'
         }        
             
         stage("Build-image") {

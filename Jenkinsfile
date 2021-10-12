@@ -13,7 +13,7 @@ node {
             sh 'mvn validate'
 //             sh 'mvn test'
 //             sh 'mvn compile'
-            sh 'mvn package'
+            sh 'mvn clean package'
         }  
         
         stage('Show_jar') {

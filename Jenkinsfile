@@ -18,7 +18,7 @@ node {
         }
 
         stage("Run-image") {
-            docker.image("$imageProject").withRun("--name image-$BUILD_ID -p 9090:90") {
+            docker.image("$imageProject").withRun("--name image-$BUILD_ID -p 9090:8080") {
                 c -> 
                 sh 'docker ps -a'
                 echo 'run success'

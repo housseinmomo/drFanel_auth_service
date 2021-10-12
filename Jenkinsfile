@@ -10,20 +10,25 @@ node {
         }
 
         stage('Build_App') {
+            sh 'mvn compile'
             sh 'mvn validate'
-        }        
+        }  
+        
+        stage('Show_jar') {
+            sh 'ls /target/*.jar'
+        }  
             
-        stage("Build-image") {
-            docker.build("$imageProject" , ".")
-        }
+//         stage("Build-image") {
+//             docker.build("$imageProject" , ".")
+//         }
 
-        stage("Run-image") {
-            docker.image("$imageProject").withRun("--name image-$BUILD_ID -p 9090:8080") {
-                c -> 
-                sh 'docker ps -a'
-                echo 'run success'
-            }
-        }
+//         stage("Run-image") {
+//             docker.image("$imageProject").withRun("--name image-$BUILD_ID -p 9090:8080") {
+//                 c -> 
+//                 sh 'docker ps -a'
+//                 echo 'run success'
+//             }
+//         }
 
         // stage('list of host') {
         //     steps {

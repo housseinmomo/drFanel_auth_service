@@ -10,7 +10,7 @@ node {
         }
 
         stage('Build_project') {
-            sh 'mvn validate'
+            //sh 'mvn validate'
 //             sh 'mvn test'
 //             sh 'mvn compile'
             sh 'mvn clean package'

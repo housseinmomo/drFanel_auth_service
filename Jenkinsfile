@@ -101,11 +101,11 @@ node {
       sh "docker push abdoulfatah123/drfanel:backup-$BUILD_ID"
     }
     
-    stage("Remove-image") {
-        sh "docker image rm -f $imageProject abdoulfatah123/drfanel:backup-$BUILD_ID"
-        sh 'docker images'
-        echo "image remove"
-    }
+    // stage("Remove-image") {
+    //     sh "docker image rm -f $imageProject abdoulfatah123/drfanel:backup-$BUILD_ID"
+    //     sh 'docker images'
+    //     echo "image remove"
+    // }
 
     // stage("Deploy-App") {
     //     sh 'ansible-playbook -e "image_cible=abdoulfatah123/drfanel:backup-$BUILD_ID build_number=$BUILD_ID"  -i inventory playbook.yml' 

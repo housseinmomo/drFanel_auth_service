@@ -9,9 +9,11 @@ node {
             checkout scm
         }
 
-        stage('Build_App') {
-            sh 'mvn compile'
+        stage('Build_project') {
             sh 'mvn validate'
+            sh 'mvn test'
+            sh 'mvn compile'
+            sh 'mvn package'
         }  
         
         stage('Show_jar') {

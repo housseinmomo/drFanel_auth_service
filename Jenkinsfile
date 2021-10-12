@@ -15,7 +15,7 @@ node {
         }  
         
         stage('Show_jar') {
-            sh 'ls'
+            sh 'ls /target'
         }  
             
 //         stage("Build-image") {
